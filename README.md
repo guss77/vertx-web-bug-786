@@ -10,7 +10,8 @@ The application is a simple library demo and provides the following routes:
 
  * `/books` - list all books in the library. Should also work with `/books/`
  * `/books/:id` - retrieve information on a single book by its index in the book list (0-based)
- * `/books/:id/authors` - retrieve information on authors of a single book, but the book's index in the book list. Should also work with '/books/:id/authors/`.
+ * `/books/:id/authors` - retrieve information on authors of a single book, but the book's index
+     in the book list. Should also work with `/books/:id/authors/`.
 
 ## Test status
 
