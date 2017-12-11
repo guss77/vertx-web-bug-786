@@ -16,10 +16,11 @@ public class Book {
 	}
 
 	public JsonObject toJson() {
+		JsonArray auths = Stream.of(authors).map(Author::toJson)
+				.collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
 		return new JsonObject()
 				.put("name", name)
-				.put("authors", Stream.of(authors).map(Author::toJson)
-						.collect(JsonArray::new, JsonArray::add, JsonArray::addAll));
+				.put("authors", auths);
 	}
 
 	public Author[] getAuthors() {
