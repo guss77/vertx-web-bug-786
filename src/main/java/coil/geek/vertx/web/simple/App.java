@@ -8,7 +8,7 @@ import io.vertx.ext.web.Router;
 public class App extends AbstractVerticle {
 
 	@Override
-	public void start(Future<Void> startFuture) throws Exception {
+	public void start(Promise<Void> startFuture) throws Exception {
 		try {
 			vertx.createHttpServer(new HttpServerOptions())
 					.requestHandler(getRouter(vertx))
@@ -34,7 +34,7 @@ public class App extends AbstractVerticle {
 		router.get("/books/:id/*").handler(books.fetchById);
 		router.get("/books/:id/authors").handler(books.authors);
 		
-		return router::accept;
+		return router;
 	}
 
 }

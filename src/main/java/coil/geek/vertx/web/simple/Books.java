@@ -36,7 +36,7 @@ public class Books {
 
 	private void okResponse(RoutingContext r, String res) {
 		r.response().setStatusCode(200).setStatusMessage("OK").putHeader("Content-Type", "application/json")
-				.putHeader("Content-Length", "" + res.length()).write(res).end();
+				.putHeader("Content-Length", "" + res.length()).send(res);
 	}
 
 	public JsonArray getBooks() {

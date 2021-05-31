@@ -1,5 +1,7 @@
 package coil.geek.vertx.web.simple.tests;
 
+import static io.vertx.core.http.HttpMethod.*;
+
 import java.util.Random;
 
 import org.junit.*;
@@ -12,6 +14,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientResponse;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -44,41 +47,41 @@ public class BooksTest {
 	@Test
 	public void testBookList(TestContext context) {
 		Async f = context.async();
-		getClient().get(port, "localhost", "/books")
-		.exceptionHandler(context::fail)
-		.handler(compareBodyHandler(verifyBooks.getBooks().encodePrettily(), context, f)).end();
+		getClient().request(GET, port, "localhost", "/books").compose(r -> r.send())
+		.onFailure(context::fail)
+		.onSuccess(compareBodyHandler(verifyBooks.getBooks().encodePrettily(), context, f));
 	}
 
 	@Test
 	public void testBookListTrailingSlash(TestContext context) {
 		Async f = context.async();
-		getClient().get(port, "localhost", "/books/")
-		.exceptionHandler(context::fail)
-		.handler(compareBodyHandler(verifyBooks.getBooks().encodePrettily(), context, f)).end();
+		getClient().request(GET, port, "localhost", "/books/").compose(r -> r.send())
+		.onFailure(context::fail)
+		.onSuccess(compareBodyHandler(verifyBooks.getBooks().encodePrettily(), context, f));
 	}
 
 	@Test
 	public void testGetBook(TestContext context) {
 		Async f = context.async();
-		getClient().get(port, "localhost", "/books/1")
-		.exceptionHandler(context::fail)
-		.handler(compareBodyHandler(verifyBooks.getBooks().getJsonObject(1).encodePrettily(), context, f)).end();
+		getClient().request(GET, port, "localhost", "/books/1").compose(r -> r.send())
+		.onFailure(context::fail)
+		.onSuccess(compareBodyHandler(verifyBooks.getBooks().getJsonObject(1).encodePrettily(), context, f));
 	}
 
 	@Test
 	public void testGetAuthors(TestContext context) {
 		Async f = context.async();
-		getClient().get(port, "localhost", "/books/2/authors")
-		.exceptionHandler(context::fail)
-		.handler(compareBodyHandler(verifyBooks.getBooks().getJsonObject(2).getJsonArray("authors").encodePrettily(), context, f)).end();
+		getClient().request(GET, port, "localhost", "/books/2/authors").compose(r -> r.send())
+		.onFailure(context::fail)
+		.onSuccess(compareBodyHandler(verifyBooks.getBooks().getJsonObject(2).getJsonArray("authors").encodePrettily(), context, f));
 	}
 
 	@Test
 	public void testGetAuthorsTrailingSlash(TestContext context) {
 		Async f = context.async();
-		getClient().get(port, "localhost", "/books/2/authors/")
-		.exceptionHandler(context::fail)
-		.handler(compareBodyHandler(verifyBooks.getBooks().getJsonObject(2).getJsonArray("authors").encodePrettily(), context, f)).end();
+		getClient().request(GET, port, "localhost", "/books/2/authors/").compose(r -> r.send())
+		.onFailure(context::fail)
+		.onSuccess(compareBodyHandler(verifyBooks.getBooks().getJsonObject(2).getJsonArray("authors").encodePrettily(), context, f));
 	}
 
 	private Handler<HttpClientResponse> compareBodyHandler(String message, TestContext context, Async f) {
