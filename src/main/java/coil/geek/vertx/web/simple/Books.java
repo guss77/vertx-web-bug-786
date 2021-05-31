@@ -3,6 +3,7 @@ package coil.geek.vertx.web.simple;
 import java.util.stream.Stream;
 
 import io.vertx.core.Handler;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.RoutingContext;
 
@@ -20,8 +21,14 @@ public class Books {
 	};
 
 	public Handler<RoutingContext> fetchById = r -> {
-		r.put("book", SampleBooks[Integer.parseInt(r.pathParam("id"))]);
-		r.next();
+		try {
+			r.put("book", SampleBooks[Integer.parseInt(r.pathParam("id"))]);
+			r.next();
+		} catch (NumberFormatException e) {
+			Buffer msg = Buffer.buffer("Invalid id parameter '" + r.pathParam("id") + "' - it must be a number", "utf-8");
+			r.response().setStatusCode(400).setStatusMessage("Bad Request").putHeader("Content-Type", "text/plain; charset=utf-8")
+					.putHeader("Content-Length", "" + msg.length()).send(msg);
+		}
 	};
 
 	public Handler<RoutingContext> display = r -> {
