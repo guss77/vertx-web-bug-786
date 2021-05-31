@@ -15,4 +15,4 @@ The application is a simple library demo and provides the following routes:
 
 ## Test status
 
-[![CircleCI](https://circleci.com/gh/guss77/vertx-web-bug-786.svg?style=svg)](https://circleci.com/gh/guss77/vertx-web-bug-786)
+[![Travis](https://travis-ci.com/guss77/vertx-web-bug-786.svg?branch=master)](https://travis-ci.com/github/guss77/vertx-web-bug-786)
