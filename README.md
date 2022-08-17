@@ -15,4 +15,4 @@ The application is a simple library demo and provides the following routes:
 
 ## Test status
 
-[![Travis](https://travis-ci.com/guss77/vertx-web-bug-786.svg?branch=master)](https://travis-ci.com/github/guss77/vertx-web-bug-786)
+[![Github Action](https://github.com/guss77/vertx-web-bug-786/actions/workflows/maven.yml/badge.svg)](https://github.com/guss77/vertx-web-bug-786/actions/workflows/maven.yml)
