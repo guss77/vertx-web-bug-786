@@ -1,6 +1,6 @@
 # Minimal test case to reproduce trailing slash discrimination bug with pattern routes
 
-See [Vert.x Web issue #786](https://github.com/vert-x3/vertx-web/issues/786) for more details.
+See [Vert.x Web issue #786](https://github.com/vert-x3/vertx-web/issues/786) for details about this failure, though this issue [is already fixed in current Vert.x distributions, as of October 2021](https://github.com/vert-x3/vertx-web/pull/1960)
 
 This project contains a simple Vert.X Web application and a unit tests to exercise some routes in the application.
 
